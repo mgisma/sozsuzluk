@@ -1,6 +1,7 @@
 import { addEntry } from './firebase/operations';
 
 export const generateContent = async (prompt, title) => {
+    console.log(process.env.GEMINI_API_KEY);
     const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${import.meta.env.GEMINI_API_KEY || process.env.GEMINI_API_KEY}`, {
         method: "POST",
         headers: {
