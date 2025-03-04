@@ -44,10 +44,10 @@ const AddEntryPage = ({ user }) => {
     try {
       await addEntry(title, entry, user);
       if(entry.includes('@gemini')){
-        generateContent(entry, title);
-        setTimeout(() => navigate('/title/'+title), 1500);
+        generateContent(entry, title.toLowerCase());
+        setTimeout(() => navigate('/title/'+title.toLowerCase()), 2500);
       }
-      else navigate('/title/'+title);
+      else navigate('/title/'+title.toLowerCase());
     } catch (error) {
       setError('Error adding entry: ' + error.message);
       setIsSubmitting(false);
@@ -83,9 +83,6 @@ const AddEntryPage = ({ user }) => {
         {error && <div className="error-message">{error}</div>}
 
         <div className="form-actions">
-          <button type="button" onClick={() => navigate('/')} className="cancel-button">
-            ləğv et
-          </button>
           <button 
             type="submit" 
             className="submit-button"

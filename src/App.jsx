@@ -9,6 +9,7 @@ import MainPage from './components/MainPage';
 import AddEntryPage from './components/AddEntryPage';
 import TitlePage from './components/TitlePage';
 import UserPage from './components/UserPage';
+import Footer from './components/Footer';
 
 function App() {
   const [user, setUser] = useState(() => {
@@ -74,7 +75,7 @@ function App() {
           </Link>
         ) : (
           <button className="login-button" onClick={signInWithGoogle}>
-            Google ilə daxil ol
+            giriş
           </button>
         )}
       </div>
@@ -85,6 +86,8 @@ function App() {
         <Route path="/title/:titleId" element={<TitlePage user={user} />} />
         <Route path="/user/:userId" element={<UserPage currentUser={user} />} />
       </Routes>
+
+      <Footer />
     </BrowserRouter>
   );
 }

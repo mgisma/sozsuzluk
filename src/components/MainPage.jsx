@@ -3,7 +3,6 @@ import { signInWithGoogle, auth, db } from '../firebase/config';
 import { onAuthStateChanged } from 'firebase/auth';
 import { useNavigate, Link } from 'react-router-dom';
 import { collection, getDocs } from 'firebase/firestore';
-import './MainPage.css';
 
 const MainPage = ({ user }) => {
   const [titles, setTitles] = useState([]);

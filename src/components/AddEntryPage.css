@@ -4,12 +4,8 @@
   color: white;
 }
 
-.add-entry-form {
-  max-width: 800px;
-}
-
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .form-group label {
@@ -27,6 +23,7 @@
   border-radius: 5px;
   color: white;
   font-size: 16px;
+  resize: vertical;
 }
 
 .form-group input:focus,
@@ -45,29 +42,3 @@
   gap: 10px;
   justify-content: flex-end;
 }
-
-.submit-button {
-  background-color: #4285f4;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.submit-button:hover {
-  background-color: #357abd;
-}
-
-.cancel-button {
-  background-color: #333;
-  color: white;
-  border: 1px solid #444;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.cancel-button:hover {
-  background-color: #444;
-} 

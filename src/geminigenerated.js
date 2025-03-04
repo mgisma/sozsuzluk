@@ -1,29 +1,34 @@
 import { addEntry } from './firebase/operations';
 
 export const generateContent = async (prompt, title) => {
-    console.log(process.env.GEMINI_API_KEY);
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${import.meta.env.VITE_GEMINI_API_KEY || process.env.VITE_GEMINI_API_KEY}`, {
+    console.log(import.meta.env.VITE_GEMINI_API_KEY);
+    try {
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${import.meta.env.VITE_GEMINI_API_KEY}`, {
         method: "POST",
         headers: {
-            "Content-Type": "application/json"
+          "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            "contents": [
+          "contents": [
+            {
+              "parts": [
                 {
-                    "parts": [
-                        {
-                            "text": prompt
-                        }
-                    ]
+                  "text": prompt
                 }
-            ]
+              ]
+            }
+          ]
         })
-    })
-    .then(response => response.json())
-    .then(data => {
-        const geminiEntry = data.candidates[0].content.parts[0].text
-        console.warn(geminiEntry);
-        addEntry(title, geminiEntry, {displayName: 'gemini-ai'}, true);
-    })
-    .catch(error => console.error(error));
-}
+      });
+  
+      const data = await response.json();
+      const geminiEntry = data.candidates[0].content.parts[0].text;
+  
+      const gr = await addEntry(title, geminiEntry, { displayName: 'gemini-ai' }, true);
+      return gr;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  };
+  

@@ -88,21 +88,32 @@ const UserPage = ({ currentUser }) => {
             </button>
           )}
         </div>
-        <div className="user-info">
-          <h2 className="user-name">{user.displayName}</h2>
-          <div className="user-joined">
-            qoşuldu: {new Date(user.createdAt).toLocaleDateString()}
+        <div className="user-info-section">
+          <div className="user-info">
+            <h2 className="user-name">{user.displayName}</h2>
+            <div className="user-joined">
+              qoşuldu: {new Date(user.createdAt).toLocaleDateString()}
+            </div>
+            {editing ? (
+              <div className="bio-edit">
+                <textarea
+                  value={bio}
+                  onChange={(e) => setBio(e.target.value)}
+                  placeholder="bio əlavə edin..."
+                  rows="3"
+                  className="bio-input"
+                />
+              </div>
+            ) : (
+              <div className="bio-section">
+                <div className="user-bio">
+                  {user.bio || 'bio əlavə edilməyib'}
+                </div>
+              </div>
+            )}
           </div>
-          
-          {editing ? (
-            <div className="bio-edit">
-              <textarea
-                value={bio}
-                onChange={(e) => setBio(e.target.value)}
-                placeholder="bio əlavə edin..."
-                rows="3"
-                className="bio-input"
-              />
+          <div className="button-section">
+            {editing ? (
               <div className="bio-actions">
                 <button 
                   className="cancel-button"
@@ -121,22 +132,19 @@ const UserPage = ({ currentUser }) => {
                   {isSubmitting ? 'saxlanılır...' : 'saxla'}
                 </button>
               </div>
-            </div>
-          ) : (
-            <div className="bio-section">
-              <div className="user-bio">
-                {user.bio || 'bio əlavə edilməyib'}
+            ) : (
+              <div>
+                {isOwnProfile && (
+                  <button 
+                    className="edit-bio-button"
+                    onClick={() => setEditing(true)}
+                  >
+                    bio edit
+                  </button>
+                )}
               </div>
-              {isOwnProfile && (
-                <button 
-                  className="edit-bio-button"
-                  onClick={() => setEditing(true)}
-                >
-                  bio edit
-                </button>
-              )}
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
     </div>

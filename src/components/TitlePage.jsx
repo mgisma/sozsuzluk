@@ -15,6 +15,7 @@ const TitlePage = ({ user }) => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [gemini, setGemini] = useState(null);
 
   useEffect(() => {
     const fetchTitle = async () => {
@@ -58,8 +59,10 @@ const TitlePage = ({ user }) => {
     try {
       await addEntry(titleId, entry, user);
       if(entry.includes('@gemini')){
-        generateContent(entry, titleId);
-        setTimeout(() => navigate(0), 1500);
+        setGemini('gemini düşünür..')
+        generateContent(entry, titleId).then((generated) => {
+          if(generated) navigate(0);
+        });
       }
       else navigate(0)
     } catch (error) {
@@ -109,6 +112,7 @@ const TitlePage = ({ user }) => {
               className="entry-input"
             />
             {error && <div className="error-message">{error}</div>}
+            {gemini && <div className="gemini-message">{gemini}</div>}
             <button 
               className="add-entry-button"
               onClick={handleAddEntry}
