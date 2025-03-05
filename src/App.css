@@ -399,6 +399,9 @@ button:hover {
   #root{
     padding: 1rem;
   }
+  .user-profile{
+    flex-direction: column;
+  }
 }
 
 .footer {
